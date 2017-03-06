@@ -12,10 +12,10 @@ import time
 from netaddr import IPNetwork,IPAddress
 
 # リッスンするホストのIPアドレス
-host   = "10.101.10.1"
+host   = ""
 
 # 標的のサブネット
-subnet = "255.255.255.0/24"
+subnet = ""
 
 # ICMPレスポンスのチェック用マジック文字列
 magic_message = "PYTHONRULES!"

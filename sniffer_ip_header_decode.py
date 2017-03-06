@@ -8,8 +8,7 @@ import struct
 from ctypes import *
 
 # リッスンするホストのIPアドレス
-host   = "10.101.10.1"
-
+host   = ""
 # IPヘッダー
 class IP(Structure):
     _fields_ = [

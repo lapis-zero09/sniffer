@@ -5,7 +5,7 @@ import socket
 import os
 
 # リッスンするホストのIPアドレス
-host = "10.101.10.1"
+host = ""
 
 # rawソケットを作成しパブリックなインタフェースにバインド
 if os.name == "nt":

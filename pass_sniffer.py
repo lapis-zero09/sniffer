@@ -37,7 +37,7 @@ def capture_telnet(src_ip_port, dst_ip_port, data, ack, seq):
         # Do a utf decode in case the client sends telnet options before their username
         # No one would care to see that
         try:
-            telnet_stream[src_ip_port] += load.decode('utf8')
+            telnet_stream[src_ip_port] += data.decode('utf8')
         except UnicodeDecodeError:
             pass
 
@@ -58,7 +58,7 @@ def capture_telnet(src_ip_port, dst_ip_port, data, ack, seq):
     # maybe use dissector.py telnet lib?
     if len(telnet_stream) > 100:
         telnet_stream.popitem(last=False)
-    mod_load = load.lower().strip()
+    mod_load = data.lower().strip()
     if mod_load.endswith('username:') or mod_load.endswith('login:'):
         telnet_stream[dst_ip_port] = 'username '
     elif mod_load.endswith('password:'):

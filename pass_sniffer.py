@@ -15,10 +15,9 @@ def check_packet_detail(packet):
         else:
             return False
 
-def capture_ftp(data, src_ip_port, dst_ip_port):
+def capture_ftp(packet):
     if 'user' in data.lower() or 'pass' in data.lower():
-        print("\t[*] Server: %s -> %s" % (src_ip_port, dst_ip_port))
-        print("\t  [*] %s" % packet[TCP].payload)
+        return packet[IP].src, packet[IP].dst, packet[TCP].payload
 
 def caputure_telnet(src_ip_port, dst_ip_port, data, ack, seq):
     global telnet_stream
@@ -69,11 +68,11 @@ def check_packet(packet):
     dst_ip_port = str(pkt[IP].dst) + ':' + str(pkt[TCP].dport)
     # frag_remover(ack, load)
     # pkt_frag_loads[src_ip_port] = frag_joiner(ack, src_ip_port, load)
-    data = packet[Raw].load
-    print('[*] %s packet capture was successful' % app)
     if app == 'FTP':
-        caputure_ftp(data, src_ip_port, dst_ip_port)
+        src_ip_port, dst_ip_port, data = caputure_ftp(packet)
+        print("\t[*] [%s -> %s] FTP  %s" % (src_ip_port, dst_ip_port, data))
     elif app == 'Telnet':
+        data = packet[Raw].load
         caputure_telnet(data)
 
 if __name__ == '__main__':

@@ -15,6 +15,8 @@
 - idna==2.4
 - ipaddress==1.0.18
 - netaddr==0.7.19
+- pcapy==0.11.1
 - pyasn1==0.2.3
 - pycparser==2.17
 - six==1.10.0
+- scapy==2.3.3

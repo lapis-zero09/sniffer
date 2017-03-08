@@ -4,6 +4,7 @@
 from __future__ import print_function
 import sys
 from scapy.all import *
+import re
 
 
 def check_packet_detail(packet):
@@ -22,7 +23,7 @@ def capture_ftp(packet):
         return
 
     if 'user' in data.lower() or 'pass' in data.lower():
-        if data.find('^[0-9]{3}') == -1:
+        if not re.search(r'^[0-9]{3}\s', data):
             print("[*] [%s -> %s] FTP  %s" % (packet[IP].src, packet[IP].dst, packet[TCP].payload))
     else:
         return

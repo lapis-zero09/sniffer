@@ -78,10 +78,10 @@ def check_packet(packet):
 if __name__ == '__main__':
     print('[*] Sniffing Started ...')
 
-    try:
-        sniff(prn=check_packet, store=0)
-    except Exception:
-        print('[!] Error: Failed to Initialize Sniffing')
-        sys.exit(1)
+    # try:
+    sniff(prn=check_packet, store=0)
+    # except Exception:
+    #     print('[!] Error: Failed to Initialize Sniffing')
+    #     sys.exit(1)
 
     print('[*] Sniffing Stopped')

@@ -49,9 +49,9 @@ def capture_telnet(src_ip_port, dst_ip_port, data, ack, seq):
         telnet_stream.popitem(last=False)
     mod_load = data.lower().strip()
     if mod_load.endswith('username:') or mod_load.endswith('login:'):
-        telnet_stream[dst_ip_port] = 'username '
+        telnet_stream[dst_ip_port] = 'USER '
     elif mod_load.endswith('password:'):
-        telnet_stream[dst_ip_port] = 'password '
+        telnet_stream[dst_ip_port] = 'PASS '
 
 
 def check_packet(packet):
@@ -77,10 +77,10 @@ if __name__ == '__main__':
     telnet_stream = OrderedDict()
     print('[*] Sniffing Started ...')
 
-    # try:
-    sniff(prn=check_packet, store=0)
-    # except Exception:
-    #     print('[!] Error: Failed to Initialize Sniffing')
-    #     sys.exit(1)
+    try:
+        sniff(prn=check_packet, store=0)
+    except Exception:
+        print('[!] Error: Failed to Initialize Sniffing')
+        sys.exit(1)
 
     print('[*] Sniffing Stopped')

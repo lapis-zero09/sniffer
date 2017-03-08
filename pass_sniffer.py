@@ -22,7 +22,7 @@ def capture_ftp(packet):
         return
 
     if 'user' in data.lower() or 'pass' in data.lower():
-        return packet[IP].src, packet[IP].dst, packet[TCP].payload
+        print("\t[*] [%s -> %s] FTP  %s" % (packet[IP].src, packet[IP].dst, packet[TCP].payload))
     else:
         return
 
@@ -76,8 +76,7 @@ def check_packet(packet):
     # frag_remover(ack, load)
     # packet_frag_loads[src_ip_port] = frag_joiner(ack, src_ip_port, load)
     if app == 'FTP':
-        src_ip_port, dst_ip_port, data = capture_ftp(packet)
-        print("\t[*] [%s -> %s] FTP  %s" % (src_ip_port, dst_ip_port, data))
+        capture_ftp(packet)
     elif app == 'Telnet':
         if packet.haslayer(Raw):
             data = packet[Raw].load

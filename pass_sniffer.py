@@ -16,7 +16,7 @@ def check_packet_detail(packet):
             return False
 
 def capture_ftp(packet):
-    if 'user' in data.lower() or 'pass' in data.lower():
+    if 'user' in packet[TCP].payload.lower() or 'pass' in packet[TCP].payload.lower():
         return packet[IP].src, packet[IP].dst, packet[TCP].payload
 
 def capture_telnet(src_ip_port, dst_ip_port, data, ack, seq):

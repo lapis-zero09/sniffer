@@ -28,7 +28,7 @@ def check_packet(packet):
         print("\t  [*] %s" % packet[TCP].payload)
 
 if __name__ == '__main__':
-    print('[*] Sniffing Started ...' % )
+    print('[*] Sniffing Started ...')
 
     try:
         sniff(prn=check_packet, store=0)

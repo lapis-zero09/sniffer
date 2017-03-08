@@ -6,26 +6,28 @@ import sys
 from scapy.all import *
 
 
-def check_ftp(packet):
+def check_packet_detail(packet):
     if packet.haslayer(TCP) and packet.haslayer(Raw):
         if packet[TCP].dport == 21 or packet[TCP].sport == 21:
-            return True
+            return 'FTP'
+        elif packet[TCP].dport == 23 or packet[TCP].sport == 23:
+            return 'telnet'
         else:
             return False
 
 def check_packet(packet):
-    if check_ftp(packet):
+    app = check_packet_detail(packet)
+    if app:
         pass
     else:
         return
     data = packet[Raw].load
     if 'user' in data.lower() or 'pass' in data.lower():
-        print('[*] FTP packet capture was successful')
-        print("[*] Server: %s -> %s" % (packet[IP].dst, packet[IP].src))
-        print("[*] %s" % packet[TCP].payload)
+        print('[*] %s packet capture was successful' % app)
+        print("\t[*] Server: %s -> %s" % (packet[IP].dst, packet[IP].src))
+        print("\t  [*] %s" % packet[TCP].payload)
 
 if __name__ == '__main__':
-    interface = 'wlan0'
     print('[*] Sniffing Started ...' % )
 
     try:

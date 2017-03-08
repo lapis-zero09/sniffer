@@ -5,6 +5,7 @@ from __future__ import print_function
 import sys
 from scapy.all import *
 import re
+from collections import OrderedDict
 
 
 def check_packet_detail(packet):
@@ -85,6 +86,7 @@ def check_packet(packet):
             capture_telnet(src_ip_port, dst_ip_port, data, ack, seq)
 
 if __name__ == '__main__':
+    telnet_stream = OrderedDict()
     print('[*] Sniffing Started ...')
 
     # try:

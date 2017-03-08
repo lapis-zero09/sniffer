@@ -19,6 +19,8 @@ def capture_ftp(packet):
     data = packet[Raw].load
     if 'user' in data.lower() or 'pass' in data.lower():
         return packet[IP].src, packet[IP].dst, packet[TCP].payload
+    else:
+        return
 
 def capture_telnet(src_ip_port, dst_ip_port, data, ack, seq):
     global telnet_stream
@@ -57,7 +59,7 @@ def capture_telnet(src_ip_port, dst_ip_port, data, ack, seq):
 
 
 def check_packet(packet):
-    if packet[Raw]
+    if packet[Raw]:
         app = check_packet_detail(packet)
         if app:
             pass

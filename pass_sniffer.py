@@ -22,7 +22,7 @@ def capture_ftp(packet):
         return
 
     if 'user' in data.lower() or 'pass' in data.lower():
-        print("\t[*] [%s -> %s] FTP  %s" % (packet[IP].src, packet[IP].dst, packet[TCP].payload))
+        print("[*] [%s -> %s] FTP  %s" % (packet[IP].src, packet[IP].dst, packet[TCP].payload.replace('\n', '')))
     else:
         return
 
@@ -45,7 +45,7 @@ def capture_telnet(src_ip_port, dst_ip_port, data, ack, seq):
             value = telnet_split[1].replace('\r\n', '').replace('\r', '').replace('\n', '')
             # Create msg, the return variable
             msg = 'Telnet %s: %s' % (cred_type, value)
-            printer(src_ip_port, dst_ip_port, msg)
+            print("[*] [%s -> %s]  %s" % (src_ip_port, dst_ip_port, msg))
             del telnet_stream[src_ip_port]
 
     # This part relies on the telnet packet ending in

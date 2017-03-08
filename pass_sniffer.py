@@ -15,7 +15,7 @@ def check_packet_detail(packet):
         else:
             return False
 
-def capture_ftp(packet, src):
+def capture_ftp(packet):
     if packet.haslayer(Raw):
         data = packet[Raw].load
     else:

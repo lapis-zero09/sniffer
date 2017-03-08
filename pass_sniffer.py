@@ -68,10 +68,10 @@ def check_packet(packet):
 
     if packet.haslayer(Raw):
         data = packet[Raw].load
-    if app == 'FTP':
-        capture_ftp(src_ip_port, dst_ip_port, data)
-    elif app == 'Telnet':
-        capture_telnet(src_ip_port, dst_ip_port, data, ack, seq)
+        if app == 'FTP':
+            capture_ftp(src_ip_port, dst_ip_port, data)
+        elif app == 'Telnet':
+            capture_telnet(src_ip_port, dst_ip_port, data, ack, seq)
 
 if __name__ == '__main__':
     telnet_stream = OrderedDict()

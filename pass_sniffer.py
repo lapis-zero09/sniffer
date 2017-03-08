@@ -19,7 +19,7 @@ def capture_ftp(packet):
     if 'user' in data.lower() or 'pass' in data.lower():
         return packet[IP].src, packet[IP].dst, packet[TCP].payload
 
-def caputure_telnet(src_ip_port, dst_ip_port, data, ack, seq):
+def capture_telnet(src_ip_port, dst_ip_port, data, ack, seq):
     global telnet_stream
     msg = None
 
@@ -69,11 +69,11 @@ def check_packet(packet):
     # frag_remover(ack, load)
     # packet_frag_loads[src_ip_port] = frag_joiner(ack, src_ip_port, load)
     if app == 'FTP':
-        src_ip_port, dst_ip_port, data = caputure_ftp(packet)
+        src_ip_port, dst_ip_port, data = capture_ftp(packet)
         print("\t[*] [%s -> %s] FTP  %s" % (src_ip_port, dst_ip_port, data))
     elif app == 'Telnet':
         data = packet[Raw].load
-        caputure_telnet(data)
+        capture_telnet(data)
 
 if __name__ == '__main__':
     print('[*] Sniffing Started ...')

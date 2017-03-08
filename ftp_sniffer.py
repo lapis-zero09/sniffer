@@ -28,7 +28,7 @@ if __name__ == '__main__':
     print('[*] Sniffing Started on %s...' % interface)
 
     try:
-        sniff(iface=interface, prn=check_packet, store=0)
+        sniff(prn=check_packet, store=0)
     except Exception:
         print('[!] Error: Failed to Initialize Sniffing')
         sys.exit(1)

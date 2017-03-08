@@ -62,12 +62,12 @@ def check_packet(packet):
     else:
         return
 
-    ack = str(pkt[TCP].ack)
-    seq = str(pkt[TCP].seq)
-    src_ip_port = str(pkt[IP].src) + ':' + str(pkt[TCP].sport)
-    dst_ip_port = str(pkt[IP].dst) + ':' + str(pkt[TCP].dport)
+    ack = str(packet[TCP].ack)
+    seq = str(packet[TCP].seq)
+    src_ip_port = str(packet[IP].src) + ':' + str(packet[TCP].sport)
+    dst_ip_port = str(packet[IP].dst) + ':' + str(packet[TCP].dport)
     # frag_remover(ack, load)
-    # pkt_frag_loads[src_ip_port] = frag_joiner(ack, src_ip_port, load)
+    # packet_frag_loads[src_ip_port] = frag_joiner(ack, src_ip_port, load)
     if app == 'FTP':
         src_ip_port, dst_ip_port, data = caputure_ftp(packet)
         print("\t[*] [%s -> %s] FTP  %s" % (src_ip_port, dst_ip_port, data))

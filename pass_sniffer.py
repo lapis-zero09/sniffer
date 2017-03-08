@@ -57,24 +57,25 @@ def capture_telnet(src_ip_port, dst_ip_port, data, ack, seq):
 
 
 def check_packet(packet):
-    app = check_packet_detail(packet)
-    if app:
-        pass
-    else:
-        return
+    if packet[Raw]
+        app = check_packet_detail(packet)
+        if app:
+            pass
+        else:
+            return
 
-    ack = str(packet[TCP].ack)
-    seq = str(packet[TCP].seq)
-    src_ip_port = str(packet[IP].src) + ':' + str(packet[TCP].sport)
-    dst_ip_port = str(packet[IP].dst) + ':' + str(packet[TCP].dport)
-    # frag_remover(ack, load)
-    # packet_frag_loads[src_ip_port] = frag_joiner(ack, src_ip_port, load)
-    if app == 'FTP':
-        src_ip_port, dst_ip_port, data = capture_ftp(packet)
-        print("\t[*] [%s -> %s] FTP  %s" % (src_ip_port, dst_ip_port, data))
-    elif app == 'Telnet':
-        data = packet[Raw].load
-        capture_telnet(data)
+        ack = str(packet[TCP].ack)
+        seq = str(packet[TCP].seq)
+        src_ip_port = str(packet[IP].src) + ':' + str(packet[TCP].sport)
+        dst_ip_port = str(packet[IP].dst) + ':' + str(packet[TCP].dport)
+        # frag_remover(ack, load)
+        # packet_frag_loads[src_ip_port] = frag_joiner(ack, src_ip_port, load)
+        if app == 'FTP':
+            src_ip_port, dst_ip_port, data = capture_ftp(packet)
+            print("\t[*] [%s -> %s] FTP  %s" % (src_ip_port, dst_ip_port, data))
+        elif app == 'Telnet':
+            data = packet[Raw].load
+            capture_telnet(data)
 
 if __name__ == '__main__':
     print('[*] Sniffing Started ...')

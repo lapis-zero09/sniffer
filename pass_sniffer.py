@@ -12,7 +12,7 @@ def check_packet_detail(packet):
         if packet[TCP].dport == 21 or packet[TCP].sport == 21:
             return 'FTP'
         elif packet[TCP].dport == 23 or packet[TCP].sport == 23:
-            return 'telnet'
+            return 'Telnet'
         else:
             return False
 
@@ -82,7 +82,7 @@ def check_packet(packet):
     elif app == 'Telnet':
         if packet.haslayer(Raw):
             data = packet[Raw].load
-            capture_telnet(data)
+            capture_telnet(src_ip_port, dst_ip_port, data, ack, seq)
 
 if __name__ == '__main__':
     print('[*] Sniffing Started ...')
